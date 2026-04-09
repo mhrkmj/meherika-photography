@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>City Gallery — Meherika's Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Meherika's Photography</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="cities.html" class="active">Cities</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="city-main">
+    <div class="city-hero-header">
+      <a href="cities.html" class="back-link">← All Cities</a>
+      <h1 id="city-title">Savannah</h1>
+      <p id="city-desc">Neon-lit alleyways, quiet temples, and the electric hum of a city that never quite sleeps.</p>
+    </div>
+
+    <div class="masonry-grid" id="masonry-grid">
+      <!-- Populated by JS -->
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lb-close">✕</button>
+    <button class="lb-prev" id="lb-prev">‹</button>
+    <button class="lb-next" id="lb-next">›</button>
+    <div class="lb-img-wrap">
+      <img src="" alt="" id="lb-img" />
+    </div>
+    <p class="lb-caption" id="lb-caption"></p>
+  </div>
+
+  <footer>
+    <p>© 2026 Meherika's Photography</p>
+    <p class="footer-sub">All images are original works.</p>
+  </footer>
+
+  <script>
+    const cityData = {
+      atlanta: {
+        name: "Atlanta",
+        desc: "A city where deep Southern roots tangle with the pulse of a modern metropolis.",
+        photos: [
+          { url: "photos/atlanta/_DSC6331.jpg", caption: "The Varsity and Bank of America Plaza at night" },
+          { url: "photos/atlanta/_DSC9221.jpg", caption: "Squirrel at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9228.jpg", caption: "Golden Chain Orchid at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9232.jpg", caption: "Vireya Rhododendron at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9233.jpg", caption: "Hardy Begonia at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9238.jpg", caption: "Lilypad Begonia at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9240.jpg", caption: "Hyacinth Orchid at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9243.jpg", caption: "A strand of Moth Orchids at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9246.jpg", caption: "Moth Orchid Cluster at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9248.jpg", caption: "White Moth Orchid with Speckles of Purple at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9250.jpg", caption: "Completely white Moth Orchid at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9275.jpg", caption: "Thunberg's Meadowsweet at the Atlanta Botanical Gardens" },
+          { url: "photos/atlanta/_DSC9276.jpg", caption: "Carolina Wren description at Sweetwater Creek State Park" },
+          { url: "photos/atlanta/_DSC9281.jpg", caption: "Initials carved into a tree trunk at Sweetwater Creek State Park" },
+          { url: "photos/atlanta/_DSC9282.jpg", caption: "Fallen over tree at Sweetwater Creek State Park" },
+          { url: "photos/atlanta/_DSC9285.jpg", caption: "The roots of a tree at Sweetwater Creek State Park" },
+          { url: "photos/atlanta/_DSC9291.jpg", caption: "Mill ruins at Sweetwater Creek State Park" },
+          { url: "photos/atlanta/_DSC9294.jpg", caption: "Waters of Sweetwater Creek with a hill in the back" },
+          { url: "photos/atlanta/_DSC9298.jpg", caption: "Rocky waters of Sweetwater Creek" },
+          { url: "photos/atlanta/_DSC9300.jpg", caption: "Sweetwater Creek running through green forests at Sweetwater Creek State Park" },
+          { url: "photos/atlanta/_DSC9308.jpg", caption: "Colorful trees at Sweetwater Creek State Park" },
+          { url: "photos/atlanta/_DSC5986.jpg", caption: "Ponce City Market Sign" },
+          { url: "photos/atlanta/_DSC6069.jpg", caption: "Wall of posters at Ponce City Market" },
+          { url: "photos/atlanta/_DSC7229.jpg", caption: "St. Patrick's Day Parade 2025" },
+          { url: "photos/atlanta/_DSC8538.jpg", caption: "View from Stone Mountain" },
+          { url: "photos/atlanta/IMG_1581.jpeg", caption: "Set up at a vintage store on the Belt Line" },
+          ]
+      },
+      bali: {
+        name: "Bali",
+        desc: "Terraced rice fields, incense-heavy air, and a spiritual undercurrent that runs beneath every sunrise and ceremony.",
+        photos: [
+          { url: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=900&q=85", caption: "Hagia Sophia at dusk" },
+          { url: "https://images.unsplash.com/photo-1527838832700-5059252407fa?w=600&q=85", caption: "Galata bridge fishermen" },
+          { url: "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=900&q=85", caption: "Grand Bazaar lanterns" },
+          { url: "https://images.unsplash.com/photo-1547558840-af680832fc9c?w=600&q=85", caption: "Bosphorus ferry crossing" },
+          { url: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=900&q=85", caption: "Rooftops toward the Horn" },
+        ]
+      },
+      bangkok: {
+        name: "Bangkok",
+        desc: "A city of gilded temples and chaotic street markets where the sacred and the electric exist side by side.",
+        photos: [
+          { url: "photos/bangkok/_DSC8030.jpg", caption: "Wat Arun from the Enterance" },
+          { url: "photos/bangkok/_DSC8037.jpg", caption: "Close Up of the Mosaics on Wat Arun" },
+          { url: "photos/bangkok/_DSC8046.jpg", caption: "Designs on the Main Prang of Wat Arun" },
+          { url: "photos/bangkok/_DSC8048.jpg", caption: "Wat Arun Prang From Eye Level" },
+          { url: "photos/bangkok/_DSC8050.jpg", caption: "One of the Prangs of Wat Arun" },
+          { url: "photos/bangkok/_DSC8052.jpg", caption: "Wat Arun From the River Bank" },
+          { url: "photos/bangkok/_DSC8059.jpg", caption: "Wat Arun From the River" },
+          { url: "photos/bangkok/_DSC8073.jpg", caption: "Wat Arun From a Street Across the River" },
+          { url: "photos/bangkok/_DSC8079.jpg", caption: "Lively Street in the Yai District" },
+          { url: "photos/bangkok/_DSC8106.jpg", caption: "A Utility Box Covered in Stickers and Graffiti" },
+          { url: "photos/bangkok/_DSC8110.jpg", caption: "Street Signs in Mandarin" },
+          { url: "photos/bangkok/_DSC8114.jpg", caption: "The Enterance of the Main Chinatown Street" },
+          { url: "photos/bangkok/_DSC8117.jpg", caption: "The Stalls of Chinatown, Bangkok" },
+          { url: "photos/bangkok/_DSC8124.jpg", caption: "Colorful Manhole Cover in ChinatownThe Enterance of the Main Chinatown Street" },
+          { url: "photos/bangkok/_DSC8127.jpg", caption: "Sustainable Map Art Piece" },
+          { url: "photos/bangkok/_DSC8137.jpg", caption: "Wall in Downtown Bangkok with Graffiti" },
+          { url: "photos/bangkok/_DSC8146.jpg", caption: "Murals on the Streets of Bangkok" },
+          { url: "photos/bangkok/_DSC8150.jpg", caption: "Bangkok Skyline on a Cloudy Day" },
+          { url: "photos/bangkok/_DSC8162.jpg", caption: "Old Car on the Streets of Bangkok" },
+          { url: "photos/bangkok/_DSC8213.jpg", caption: "Talat Phlu Train Station" },
+          { url: "photos/bangkok/_DSC8222.jpg", caption: "Thai Street Food Stall Shown in How To Make Millions Before Grandma Dies" },
+          { url: "photos/bangkok/_DSC8234.jpg", caption: "Talat Phlu Station Sign" },
+          { url: "photos/bangkok/_DSC8242.jpg", caption: "Train Tracks Going Over a Canal" },
+          { url: "photos/bangkok/_DSC8247.jpg", caption: "Flowers Lining a Street in Talat Phlu" },
+          { url: "photos/bangkok/_DSC8256.jpg", caption: "A Ganesh Statue at a House" },
+          { url: "photos/bangkok/_DSC8263.jpg", caption: "The Blue House From How To Make Millions Before Grandma Dies" },
+          { url: "photos/bangkok/_DSC8275.jpg", caption: "An Old Couch Left by Train Tracks" },
+          { url: "photos/bangkok/_DSC8279.jpg", caption: "A Bright Lone Hibiscus" },
+          { url: "photos/bangkok/_DSC8286.jpg", caption: "A Quiet Street in Talat Phlu" },
+        ]
+      },
+      guwahati: {
+        name: "Guwahati",
+        desc: "Perched on the banks of the Brahmaputra, a gateway city where the mist-covered hills of the Northeast begin to whisper their secrets.",
+        photos: [
+          { url: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=85", caption: "Fushimi Inari torii gates" },
+          { url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85", caption: "Arashiyama bamboo grove" },
+          { url: "https://images.unsplash.com/photo-1533050487297-09b450131914?w=900&q=85", caption: "Kinkaku-ji reflection" },
+          { url: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=85", caption: "Lantern light, Gion" },
+          { url: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=900&q=85", caption: "Cherry blossoms, riverside" },
+          { url: "https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?w=600&q=85", caption: "Philosopher's Path" },
+        ]
+      },
+      hcmc: {
+        name: "Ho Chi Minh City",
+        desc: "Motorbikes, French-colonial facades, and a restless, forward-moving energy that never quite lets you catch your breath.",
+        photos: [
+          { url: "photos/hcmc/_DSC7298.jpg", caption: "Skyline From my Bedroom Window" },
+          { url: "photos/hcmc/_DSC7308.jpg", caption: "Street of Downtown District 1" },
+          { url: "photos/hcmc/_DSC7325.jpg", caption: "Wake Surfers on Rạch Bàng" },
+          { url: "photos/hcmc/_DSC7329.jpg", caption: "Aerial Image of Lush Riverside Park and Tennis Court" },
+          { url: "photos/hcmc/_DSC9195.jpg", caption: "Nguyễn Huệ Walking Street at Night" },
+          { url: "photos/hcmc/IMG_5352.jpeg", caption: "Streets of District 1 Adorned With Flags" },
+          { url: "photos/hcmc/IMG_7212.jpeg", caption: "Stickered Fire Hose Box in Downtown" },
+          { url: "photos/hcmc/IMG_8089.jpeg", caption: "Plants Lining the Hallway of the Café Apartment Building" },
+          
+        ]
+      },
+      newyork: {
+        name: "New York",
+        desc: "Concrete canyons, fire escapes, and a million stories unfolding on every block.",
+        photos: [
+          { url: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=900&q=85", caption: "Manhattan from the bridge" },
+          { url: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=85", caption: "Lower East Side" },
+          { url: "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?w=900&q=85", caption: "Times Square, overcast" },
+          { url: "https://images.unsplash.com/photo-1513326738677-b964603b136d?w=600&q=85", caption: "Central Park in autumn" },
+          { url: "https://images.unsplash.com/photo-1555109307-f7d9da25c244?w=900&q=85", caption: "Brooklyn rooftops" },
+          { url: "https://images.unsplash.com/photo-1422051781751-f5938e3d1c8c?w=600&q=85", caption: "Subway light trails" },
+        ]
+      },
+      phuquoc: {
+        name: "Phu Quoc",
+        desc: "A Vietnamese island of rust-red fishing boats, pepper farms, and water so clear it barely seems real.",
+        photos: [
+          { url: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=85", caption: "Fushimi Inari torii gates" },
+          { url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85", caption: "Arashiyama bamboo grove" },
+          { url: "https://images.unsplash.com/photo-1533050487297-09b450131914?w=900&q=85", caption: "Kinkaku-ji reflection" },
+          { url: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=85", caption: "Lantern light, Gion" },
+          { url: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=900&q=85", caption: "Cherry blossoms, riverside" },
+          { url: "https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?w=600&q=85", caption: "Philosopher's Path" },
+        ]
+      },
+      savannah: {
+        name: "Savannah",
+        desc: "Neon-lit alleyways, quiet temples, and the electric hum of a city that never quite sleeps.",
+        photos: [
+          { url: "photos/savannah/_DSC9312.JPG", caption: "Forsyth Park at dusk" },
+          { url: "photos/savannah/_DSC9329.JPG", caption: "Strange Bird Streamliner" },
+          { url: "photos/savannah/_DSC9332.JPG", caption: "Strange Bird sign" },
+          { url: "photos/savannah/_DSC9335.JPG", caption: "Multi-story home in the historic district" },
+          { url: "photos/savannah/_DSC9349.JPG", caption: "Street signs for Whittaker and Gwinnet St." },
+          { url: "photos/savannah/_DSC9371.JPG", caption: "Brick names at the Forsyth Park Fountain" },
+          { url: "photos/savannah/_DSC9380.JPG", caption: "Street signs for Buli and E. Jones St." },
+          { url: "photos/savannah/_DSC9381.JPG", caption: "A street in the historic district" },
+          { url: "photos/savannah/_DSC9386.JPG", caption: "Horse carriage tour in the historic district" },
+          { url: "photos/savannah/_DSC9391.JPG", caption: "William Jasper Monument in Madison Square" },
+          { url: "photos/savannah/_DSC9408.JPG", caption: "Trustees Theatre at Night" },
+          { url: "photos/savannah/_DSC9413.JPG", caption: "Lucas Theatre For the Arts" },
+          { url: "photos/savannah/_DSC9428.JPG", caption: "Tybee Island Lighthouse" },
+          { url: "photos/savannah/_DSC9437.JPG", caption: "Tybee Island Lighthouse Head Keeper's kitchen and ironing table" },
+          { url: "photos/savannah/_DSC9439.JPG", caption: "Tybee Island Lighthouse Head Keeper's kitchen window" },
+          { url: "photos/savannah/_DSC9448.JPG", caption: "Tybee Island Lighthouse Head Keeper's sewing machine" },
+          { url: "photos/savannah/_DSC9452.JPG", caption: "Tybee Island Lighthouse Head Keeper's bedroom view" },
+          { url: "photos/savannah/_DSC9453.JPG", caption: "Tybee Island Lighthouse Head Keeper's kids' bedroom" },
+          { url: "photos/savannah/_DSC9468.JPG", caption: "Tybee Island North Beach Bar and Grill decor" },
+          { url: "photos/savannah/_DSC9470.JPG", caption: "Tybee Island North Beach Bar and Grill outside patio" },
+          { url: "photos/savannah/_DSC9471.JPG", caption: "Tybee Island North Beach Center" },
+          { url: "photos/savannah/_DSC9479.JPG", caption: "Tybee Island North Beach" },
+          { url: "photos/savannah/IMG_7503.jpg", caption: "Cathedral Basilica of St. John the Baptist" },          
+        ]
+      },
+    };
+
+    // Read city from URL param
+    const params = new URLSearchParams(window.location.search);
+    const cityKey = params.get("city") || "savannah";
+    const city = cityData[cityKey] || cityData.savannah;
+
+    document.title = city.name + " — Meherika's Photography";
+    document.getElementById("city-title").textContent = city.name;
+    document.getElementById("city-desc").textContent = city.desc;
+
+    // Build masonry grid
+    const grid = document.getElementById("masonry-grid");
+    city.photos.forEach((photo, i) => {
+      const item = document.createElement("div");
+      item.className = "masonry-item";
+      item.innerHTML = `<img src="${photo.url}" alt="${photo.caption}" loading="lazy" />`;
+      item.addEventListener("click", () => openLightbox(i));
+      grid.appendChild(item);
+    });
+
+    // Lightbox logic
+    let currentIndex = 0;
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lb-img");
+    const lbCaption = document.getElementById("lb-caption");
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lbImg.src = city.photos[index].url.replace("w=600", "w=1400").replace("w=900", "w=1400");
+      lbCaption.textContent = city.photos[index].caption;
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("lb-close").addEventListener("click", closeLightbox);
+    document.getElementById("lb-prev").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + city.photos.length) % city.photos.length;
+      openLightbox(currentIndex);
+    });
+    document.getElementById("lb-next").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % city.photos.length;
+      openLightbox(currentIndex);
+    });
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") document.getElementById("lb-prev").click();
+      if (e.key === "ArrowRight") document.getElementById("lb-next").click();
+    });
+  </script>
+
+</body>
+</html>
