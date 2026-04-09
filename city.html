@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>City Gallery — Meherika's Photography</title>
+  <script defer src="/_vercel/insights/script.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -13,7 +14,10 @@
   <header>
     <nav>
       <a href="index.html" class="logo">Meherika's Photography</a>
-      <div class="nav-links">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="cities.html" class="active">Cities</a>
       </div>
@@ -80,7 +84,7 @@
           { url: "photos/atlanta/_DSC7229.jpg", caption: "St. Patrick's Day Parade 2025" },
           { url: "photos/atlanta/_DSC8538.jpg", caption: "View from Stone Mountain" },
           { url: "photos/atlanta/IMG_1581.jpeg", caption: "Set up at a vintage store on the Belt Line" },
-          ]
+        ]
       },
       bali: {
         name: "Bali",
@@ -110,7 +114,7 @@
           { url: "photos/bangkok/_DSC8110.jpg", caption: "Street Signs in Mandarin" },
           { url: "photos/bangkok/_DSC8114.jpg", caption: "The Enterance of the Main Chinatown Street" },
           { url: "photos/bangkok/_DSC8117.jpg", caption: "The Stalls of Chinatown, Bangkok" },
-          { url: "photos/bangkok/_DSC8124.jpg", caption: "Colorful Manhole Cover in ChinatownThe Enterance of the Main Chinatown Street" },
+          { url: "photos/bangkok/_DSC8124.jpg", caption: "Colorful Manhole Cover in Chinatown" },
           { url: "photos/bangkok/_DSC8127.jpg", caption: "Sustainable Map Art Piece" },
           { url: "photos/bangkok/_DSC8137.jpg", caption: "Wall in Downtown Bangkok with Graffiti" },
           { url: "photos/bangkok/_DSC8146.jpg", caption: "Murals on the Streets of Bangkok" },
@@ -152,7 +156,6 @@
           { url: "photos/hcmc/IMG_5352.jpeg", caption: "Streets of District 1 Adorned With Flags" },
           { url: "photos/hcmc/IMG_7212.jpeg", caption: "Stickered Fire Hose Box in Downtown" },
           { url: "photos/hcmc/IMG_8089.jpeg", caption: "Plants Lining the Hallway of the Café Apartment Building" },
-          
         ]
       },
       newyork: {
@@ -181,7 +184,7 @@
       },
       savannah: {
         name: "Savannah",
-        desc: "Neon-lit alleyways, quiet temples, and the electric hum of a city that never quite sleeps.",
+        desc: "Moss-draped squares, antebellum architecture, and a sultry Southern slowness that makes time feel irrelevant.",
         photos: [
           { url: "photos/savannah/_DSC9312.JPG", caption: "Forsyth Park at dusk" },
           { url: "photos/savannah/_DSC9329.JPG", caption: "Strange Bird Streamliner" },
@@ -205,7 +208,7 @@
           { url: "photos/savannah/_DSC9470.JPG", caption: "Tybee Island North Beach Bar and Grill outside patio" },
           { url: "photos/savannah/_DSC9471.JPG", caption: "Tybee Island North Beach Center" },
           { url: "photos/savannah/_DSC9479.JPG", caption: "Tybee Island North Beach" },
-          { url: "photos/savannah/IMG_7503.jpg", caption: "Cathedral Basilica of St. John the Baptist" },          
+          { url: "photos/savannah/IMG_7503.jpg", caption: "Cathedral Basilica of St. John the Baptist" },
         ]
       },
     };
@@ -237,7 +240,7 @@
 
     function openLightbox(index) {
       currentIndex = index;
-      lbImg.src = city.photos[index].url.replace("w=600", "w=1400").replace("w=900", "w=1400");
+      lbImg.src = city.photos[index].url;
       lbCaption.textContent = city.photos[index].caption;
       lightbox.classList.add("open");
       document.body.style.overflow = "hidden";
@@ -266,6 +269,28 @@
       if (e.key === "ArrowLeft") document.getElementById("lb-prev").click();
       if (e.key === "ArrowRight") document.getElementById("lb-next").click();
     });
+
+    // Hamburger nav
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Swipe support for lightbox
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) document.getElementById('lb-next').click();
+        else document.getElementById('lb-prev').click();
+      }
+    }, { passive: true });
+
   </script>
 
 </body>

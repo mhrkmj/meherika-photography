@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Meherika's Photography</title>
+  <script defer src="/_vercel/insights/script.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -13,7 +14,10 @@
   <header>
     <nav>
       <a href="index.html" class="logo">Meherika's Photography</a>
-      <div class="nav-links">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
         <a href="index.html" class="active">Home</a>
         <a href="cities.html">Cities</a>
       </div>
@@ -57,7 +61,6 @@
         <div class="card-img" style="background-image: url('photos/bangkok/_DSC8073.jpg')"></div>
         <div class="card-info"><span>Bangkok</span><span class="arrow">→</span></div>
       </a>
-
     </div>
   </section>
 
@@ -65,6 +68,15 @@
     <p>© 2026 Meherika's Photography</p>
     <p class="footer-sub">All images are original works.</p>
   </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  </script>
 
 </body>
 </html>

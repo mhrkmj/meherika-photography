@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cities — Meherika's Photography</title>
+  <script defer src="/_vercel/insights/script.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -13,7 +14,10 @@
   <header>
     <nav>
       <a href="index.html" class="logo">Meherika's Photography</a>
-      <div class="nav-links">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="cities.html" class="active">Cities</a>
       </div>
@@ -62,7 +66,6 @@
           <span class="tile-count">30 photos</span>
         </div>
       </a>
-
       <!-- <a href="city.html?city=bali" class="city-tile">
         <div class="tile-img" style="background-image: url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1000&q=80')"></div>
         <div class="tile-overlay">
@@ -91,6 +94,15 @@
     <p>© 2026 Meherika's Photography</p>
     <p class="footer-sub">All images are original works.</p>
   </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  </script>
 
 </body>
 </html>
